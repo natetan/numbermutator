@@ -2,37 +2,91 @@ package yulongproductions.com.numbermutator;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import java.util.Random;
 
 
 public class MainActivity extends ActionBarActivity {
+    public static final int RANGE = 100000000;
+
+    private TextView mNumTextView;
+    private EditText mNumEditText;
+    private Button mSubmitButton;
+    private Button mMaxButton;
+    private Button mMinButton;
+    private Button mRevertButton;
+    private int defaultNum;
+    private int userNum;
+    private int display;
+    private boolean isDefaultNum = true;
+
+    private NumMethods mNumMethods = new NumMethods();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        getSupportActionBar().hide();
+
+        mNumTextView = (TextView) findViewById(R.id.numTextView);
+        mNumEditText = (EditText) findViewById(R.id.numEditText);
+        mSubmitButton = (Button) findViewById(R.id.submitButton);
+
+        this.defaultNum = this.getRandomNum(RANGE);
+        this.userNum = Integer.parseInt(mNumEditText.getText().toString());
+        this.display = Integer.parseInt(mNumTextView.getText().toString());
+        mNumTextView.setText(this.defaultNum);
+
+        mSubmitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isDefaultNum = false;
+                mNumTextView.setText(userNum);
+            }
+        });
+
+        mMaxButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isDefaultNum = false;
+                mNumTextView.setText(mNumMethods.getMaxDigit(display));
+            }
+        });
+
+        mMinButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isDefaultNum = false;
+                mNumTextView.setText(mNumMethods.getMinDigit(display));
+            }
+        });
+
+        mRevertButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isDefaultNum) {
+                    revert(defaultNum);
+                } else {
+                    revert(userNum);
+                }
+            }
+        });
+
+
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    private int getRandomNum(int n) {
+        Random r = new Random();
+        int num = r.nextInt(n) + 1;
+        return num;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    private void revert(int n) {
+        mNumTextView.setText(n);
     }
 }
