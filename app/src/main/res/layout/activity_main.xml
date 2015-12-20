@@ -67,4 +67,13 @@
         android:layout_toLeftOf="@+id/getMinButton"
         android:layout_toStartOf="@+id/getMinButton"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Average"
+        android:id="@+id/getAverageButton"
+        android:layout_below="@+id/getMaxButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
 </RelativeLayout>
