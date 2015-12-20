@@ -19,6 +19,7 @@ public class MainActivity extends ActionBarActivity {
     private Button mMaxButton;
     private Button mMinButton;
     private Button mRevertButton;
+    private Button mAverageButton;
     private int defaultNum;
     private int userNum;
     private int display;
@@ -74,6 +75,14 @@ public class MainActivity extends ActionBarActivity {
                 } else {
                     revert(userNum);
                 }
+            }
+        });
+
+        mAverageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isDefaultNum = false;
+                mNumTextView.setText((int)mNumMethods.getAverage(display));
             }
         });
 
