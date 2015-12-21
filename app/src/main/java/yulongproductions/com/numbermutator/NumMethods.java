@@ -4,7 +4,9 @@ package yulongproductions.com.numbermutator;
  * Created by Yulong on 12/17/2015.
  */
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class NumMethods {
 
@@ -101,7 +103,19 @@ public class NumMethods {
     }
 
     public int getMode(int n) {
-        return 0;
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        for (int num : this.toArray(n)) {
+            if (map.containsKey(num)) {
+                map.put(num, map.get(num) + 1);
+            } else {
+                map.put(num, 1);
+            }
+        }
+        int max = 0;
+        for (int num : map.values()) {
+            max = Math.max(max, num);
+        }
+        return max;
     }
 
     public int getMedian(int n) {
