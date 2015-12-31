@@ -4,11 +4,13 @@ package yulongproductions.com.numbermutator;
  * Created by Yulong on 12/17/2015.
  */
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class NumMethods {
+    private List<Integer> mainList = new ArrayList<Integer>();
 
     public int getMaxDigit(int n) {
         n = Math.abs(n);
@@ -76,7 +78,7 @@ public class NumMethods {
         List<Integer> list = new ArrayList<Integer>();
         Stack<Integer> stack = new ArrayStack<Integer>();
         for (int i = 0; i < this.getCount(n); i++) {
-            stack.push(n % (int)Math.pow(10, (i + 1)));
+            stack.push(n % (int) Math.pow(10, (i + 1)));
         }
         while (!stack.isEmpty()) {
             list.add(stack.pop());
@@ -85,11 +87,10 @@ public class NumMethods {
     }
 
     public String reverse(int n) {
-        List<Integer> list = new ArrayList<Integer>();
-        list = this.toArray(n);
+        this.mainList = this.toArray(n);
         List<Integer> newList = new ArrayList<Integer>();
-        for (int i = list.size() - 1; i >= 0; i--) {
-            newList.add(list.get(i));
+        for (int i = this.mainList.size() - 1; i >= 0; i--) {
+            newList.add(this.mainList.get(i));
         }
         return this.printFromArray(newList);
     }
@@ -119,7 +120,14 @@ public class NumMethods {
     }
 
     public int getMedian(int n) {
-        return 0;
+        int median = 0;
+        this.mainList = this.toArray(this.sort(n));
+        if (this.getCount(n) % 2 == 0) {
+            return (int) this.mainList.get((this.mainList.size() / 2) +
+                    this.mainList.get(this.mainList.size() / 2 - 1)) / 2;
+        } else {
+            return this.mainList.get(this.mainList.size() / 2);
+        }
     }
 
     public double getAverage(int n) {
@@ -127,7 +135,9 @@ public class NumMethods {
     }
 
     public int sort(int n) {
-        return 0;
+        this.mainList = this.toArray(n);
+        Collections.sort(this.mainList);
+        return Integer.parseInt(this.printFromArray(this.mainList));
     }
 
     public String toString(int n) {
