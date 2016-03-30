@@ -11,7 +11,7 @@ import java.util.Random;
 
 
 public class MainActivity extends ActionBarActivity {
-    public static final int RANGE = 100000000;
+    public static final int RANGE = Integer.MAX_VALUE;
 
     private TextView mNumTextView;
     private EditText mNumEditText;
@@ -37,11 +37,18 @@ public class MainActivity extends ActionBarActivity {
         mNumTextView = (TextView) findViewById(R.id.numTextView);
         mNumEditText = (EditText) findViewById(R.id.numEditText);
         mSubmitButton = (Button) findViewById(R.id.submitButton);
+        mMaxButton = (Button) findViewById(R.id.getMaxButton);
+        mMinButton = (Button) findViewById(R.id.getMinButton);
+        mRevertButton = (Button) findViewById(R.id.revertButton);
+        mAverageButton = (Button) findViewById(R.id.getAverageButton);
 
         this.defaultNum = this.getRandomNum(RANGE);
-        this.userNum = Integer.parseInt(mNumEditText.getText().toString());
+        mNumTextView.setText(this.defaultNum + "");
         this.display = Integer.parseInt(mNumTextView.getText().toString());
-        mNumTextView.setText(this.defaultNum);
+        if (mNumEditText.getText().length() == 0) {
+            mNumEditText.setText(0 + "");
+        }
+        this.userNum = Integer.parseInt(mNumEditText.getText().toString());
 
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
