@@ -105,15 +105,13 @@ public class NumMethods {
 
     public int getMode(int n) {
         Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        int max = 0;
         for (int num : this.toArray(n)) {
             if (map.containsKey(num)) {
                 map.put(num, map.get(num) + 1);
             } else {
                 map.put(num, 1);
             }
-        }
-        int max = 0;
-        for (int num : map.values()) {
             max = Math.max(max, num);
         }
         return max;
