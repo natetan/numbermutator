@@ -76,7 +76,7 @@ public class NumMethods {
 
     public List<Integer> toArray(int n) {
         List<Integer> list = new ArrayList<Integer>();
-        Stack<Integer> stack = new ArrayStack<Integer>();
+        Stack<Integer> stack = new LinkedStack<Integer>();
         for (int i = 0; i < this.getCount(n); i++) {
             stack.push(n % (int) Math.pow(10, (i + 1)));
         }

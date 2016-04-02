@@ -5,7 +5,8 @@ import java.util.NoSuchElementException;
 /**
  * Created by Yulong on 4/1/2016.
  */
-public class LinkedStack<E> {
+
+public class LinkedStack<E> implements Stack<E> {
     private StackNode front;
     private int count;
 
