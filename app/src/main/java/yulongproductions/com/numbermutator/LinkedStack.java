@@ -35,4 +35,26 @@ public class LinkedStack<E> {
         }
         return (E) this.front.data;
     }
+
+    public int size() {
+        return this.count;
+    }
+
+    public boolean isEmpty() {
+        return this.size() == 0;
+    }
+
+    public String toString() {
+        if (this.isEmpty()) {
+            return "[]";
+        } else {
+            String result = "[" + this.front.data;
+            StackNode current = this.front.next;
+            while (current != null) {
+                result += ", " + current.data;
+                current = current.next;
+            }
+            return result + "]";
+        }
+    }
 }
