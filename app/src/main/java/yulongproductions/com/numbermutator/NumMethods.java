@@ -51,7 +51,7 @@ public class NumMethods {
             if (n % 10 < n / 10 % 10) {
                 return false;
             } else {
-                return true;
+                return isSorted(n / 10);
             }
         }
     }
