@@ -134,8 +134,42 @@ public class NumMethods {
 
     public int sort(int n) {
         this.mainList = this.toArray(n);
-        Collections.sort(this.mainList);
+        this.sort(this.mainList);
         return Integer.parseInt(this.printFromArray(this.mainList));
+    }
+
+    public void sort(List<Integer> list) {
+        if (list.size() > 1) {
+            int size1 = list.size() / 2;
+            int size2 = list.size() - size1;
+            List<Integer> half1 = new ArrayList<>();
+            List<Integer> half2 = new ArrayList<>();
+            for (int i = 0; i < size1; i++) {
+                half1.add(list.remove(0));
+            }
+            for (int i = 0; i < size2; i++) {
+                half2.add(list.remove(0));;
+            }
+            this.sort(half1);
+            this.sort(half2);
+            this.merge(list, half1, half2);
+        }
+    }
+
+    private void merge(List<Integer> list, List<Integer> half1, List<Integer> half2) {
+        while (!half1.isEmpty() && !half2.isEmpty()) {
+            if (half1.indexOf(0) <= half2.indexOf(0)) {
+                list.add(half1.remove(0));
+            } else {
+                list.add(half2.remove(0));
+            }
+        }
+        while (!half1.isEmpty()) {
+            list.add(half1.remove(0));
+        }
+        while (!half2.isEmpty()) {
+            list.add(half2.remove(0));
+        }
     }
 
     public String toString(int n) {

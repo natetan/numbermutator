@@ -62,7 +62,8 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 isDefaultNum = false;
-                mNumTextView.setText(mNumMethods.getMaxDigit(display));
+                int max = mNumMethods.getMaxDigit(display);
+                mNumTextView.setText(max);
             }
         });
 
